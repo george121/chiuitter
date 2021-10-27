@@ -12,18 +12,26 @@ class ChiuitRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChiuitViewHolder {
         TODO("8. Inflate the item layout and return the view holder")
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_chiuit, parent, false)
+        return ChiuitViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         TODO("9. Return the size of samples")
+        val itemCount : Int;
+        itemCount = chiuitList.size;
+        return itemCount ;
     }
 
     override fun onBindViewHolder(holder: ChiuitViewHolder, position: Int) {
         TODO("10. Bind the view holder with chiuit data sample")
+        holder.bind(chiuitList[position])
     }
 
     fun addItem(chiuit: Chiuit) {
         TODO("12. Add the new item to the list then SMARTLY notify an addition")
+        chiuitList.add(chiuit);
+        notifyDataSetChanged();
     }
 
     inner class ChiuitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
