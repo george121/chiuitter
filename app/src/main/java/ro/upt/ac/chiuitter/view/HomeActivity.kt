@@ -38,6 +38,8 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.chiuitsLiveData.observe(this, Observer { chiuts ->
             TODO("Instantiate an adapter with the received list and assign it to recycler view")
+            val listAdapter = ChiuitRecyclerViewAdapter(chiuts,
+            fun(chiuit: Chiuit): Unit = shareChiuit(chiuit.description), fun(chiuit): Unit - deleteChiuit(chiuit))
         })
 
         viewModel.retrieveChiuits()
@@ -50,7 +52,14 @@ class HomeActivity : AppCompatActivity() {
     private fun shareChiuit(text: String) {
         val sendIntent = Intent().apply {
             TODO("Customize an implicit intent which triggers text sharing")
-        }
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, chiuit.description)
+            }
+        val intentChooser = Intent.createChooser(sendIntent,"")
+        startActivity(intentChooser)
+
+    }
 
         val intentChooser = Intent.createChooser(sendIntent, "")
 
@@ -60,6 +69,11 @@ class HomeActivity : AppCompatActivity() {
     /*
     Defines an *explicit* intent which will be used to start ComposeActivity.
      */
+    private fun deleteChiut(chiuit:Chiuit) {
+         viewModel.removeChiuit(chiuit)
+         adapter?.removeChiuit(chiuit)
+    }
+
     private fun composeChiuit() {
         val intent = Intent(this, ComposeActivity::class.java)
         startActivityForResult(intent, COMPOSE_REQUEST_CODE)

@@ -29,12 +29,19 @@ class ChiuitRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ChiuitViewHolder, position: Int) {
         holder.bind(chiuitList[position])
     }
+    fun removeChiuit(chiuit:Chiuit)
+    {
+        val idx = chiuitList.indexOf(chiuit)
+        chiuitList.removeAt(idx)
 
+
+    }
     inner class ChiuitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.ibt_share.setOnClickListener { onShareClick(chiuitList[adapterPosition]) }
             TODO("Trigger delete callback same as for share")
+            itemView.ibt_delete.setOnClickListener{ onDeleteClick(chiuitList[adapterPosition])}
         }
 
         fun bind(chiuit: Chiuit) {

@@ -12,9 +12,12 @@ interface ChiuitDao {
 
 
     // TODO("Define insert")
-
+    @Insert
+    fun addChiuit(chiuit:ChiuitEntity)
 
     // TODO("Define delete")
 
+    @Delete
+    fun removeChiuit(chiuit:ChiuitEntity)
 
 }
